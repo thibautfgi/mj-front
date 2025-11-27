@@ -1,1 +1,56 @@
-MJ FRONT
+# MountainJourney
+
+<p align="center">
+  <img src="/assets/Images/logo-transp.png" alt="MountainJourney Logo" width="200">
+</p>
+
+## Description
+
+MountainJourney is the new web application for create manage and share your hiking map for your next trip. MJ have a API for manage users information and hiking map, and use the frontend API of Mapbox for create the map.
+
+This is a project free of right. You can use it has you wish if you integre our names. Thanks for your reading.
+
+## Needs
+
+- Docker.
+- MySql.
+- Dotnet.
+- Mysql workbench and Postman agent (for local test).
+
+## Installation
+
+Clone the repot and explore the project directory :
+
+```bash
+
+
+``` 
+
+## Local test of our project :
+
+For test our project on local, use the command bellow :
+
+## Use Postman
+
+Try it on Postamn for a better view of our API capabilities
+
+
+> **Warning :**
+
+The mapbox tokens is hiding on a .gitignore file. For all acces, you will need to ask the keys to a admin.
+
+
+> ### ** WARNING : ** Sometime, git can modify the sh executable endline and break it. If that happen, you will need to change your encoding of your sh file from CRLF -> LF (bottom right corner of VS CODE).
+
+## Auteurs
+
+- ThibautFgi (Github : https://github.com/thibautfgi)
+
+# **Documentationn : **
+
+For a more advance documentation on the web application look into the folder :
+
+
+
+
+
