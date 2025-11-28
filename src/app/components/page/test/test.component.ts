@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnDestroy, OnInit, signal, viewChild} from '@angular/core';
 import mapboxgl from 'mapbox-gl';
+import {environment} from '../../../../../environment';
 
 @Component({
   selector: 'app-test',
@@ -13,7 +14,7 @@ export class TestComponent implements OnInit, OnDestroy {
   private mapContainer = viewChild.required<ElementRef<HTMLDivElement>>('mapContainer');
 
   ngOnInit(): void {
-    (mapboxgl as any).accessToken = 'pk.eyJ1IjoianVzdGFjaGlwcyIsImEiOiJjbHgwZHgxcGowaG01MmlyMnhhb3dyZXJxIn0.dcYR9tSRJ2AUaoCsJ7gbVA';
+    (mapboxgl as any).accessToken = environment.MAPBOX_TOKEN_PUBLIC
 
     const mapInstance = new mapboxgl.Map({
       container: this.mapContainer().nativeElement,
