@@ -52,7 +52,4 @@ The mapbox tokens is hiding on a .gitignore file. For all acces, you will need t
 
 For a more advance documentation on the web application look into the folder :
 
-
-
-
-
+test
