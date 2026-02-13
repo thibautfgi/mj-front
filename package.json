@@ -6,7 +6,8 @@
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "eslint \"src/**/*.{ts,js}\""
   },
   "prettier": {
     "printWidth": 100,
@@ -22,6 +23,7 @@
   },
   "private": true,
   "packageManager": "npm@10.9.0",
+  "type": "module",
   "dependencies": {
     "@angular/common": "^21.0.0",
     "@angular/compiler": "^21.0.0",
@@ -41,6 +43,9 @@
     "@angular/compiler-cli": "^21.0.0",
     "@types/mapbox-gl": "^3.4.1",
     "@types/node": "^20.17.19",
+    "@typescript-eslint/eslint-plugin": "^8.55.0",
+    "@typescript-eslint/parser": "^8.55.0",
+    "eslint": "^9.39.2",
     "jsdom": "^27.1.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
