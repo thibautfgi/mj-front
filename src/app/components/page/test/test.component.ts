@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnDestroy, OnInit, signal, viewChild} from '@angular/core';
 import mapboxgl from 'mapbox-gl';
-import {environment} from '../../../../../environment';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-test',
