@@ -1,18 +1,12 @@
-import { Component, HostListener } from '@angular/core';
-import { CustomButtons } from '../../communs/custom-buttons/custom-buttons';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  imports: [CustomButtons],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
-  standalone: true,
+  standalone: true
 })
 export class HomeComponent {
-  showButton = true;
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.showButton = window.scrollY === 0;
-  }
 }
