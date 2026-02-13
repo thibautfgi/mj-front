@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, signal, viewChild} from '@angular/core';
 import mapboxgl from 'mapbox-gl';
-import { environment } from '../../../../../environment';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-test',
@@ -80,12 +80,12 @@ export class TestComponent implements OnInit, OnDestroy {
           // Marqueurs départ / arrivée
           const coords = geojson.features[0]?.geometry.coordinates || [];
           if (coords.length > 0) {
-            new mapboxgl.Marker({ color: '#00ff00' })
+            new mapboxgl.Marker({color: '#00ff00'})
               .setLngLat(coords[0] as [number, number])
               .setPopup(new mapboxgl.Popup().setText('Départ GR20'))
               .addTo(mapInstance);
 
-            new mapboxgl.Marker({ color: '#ff0000' })
+            new mapboxgl.Marker({color: '#ff0000'})
               .setLngLat(coords[coords.length - 1] as [number, number])
               .setPopup(new mapboxgl.Popup().setText('Arrivée Étape 1'))
               .addTo(mapInstance);
@@ -97,7 +97,7 @@ export class TestComponent implements OnInit, OnDestroy {
                 coords[0] as [number, number],
               ),
             );
-            mapInstance.fitBounds(bounds, { padding: 50, duration: 1000 });
+            mapInstance.fitBounds(bounds, {padding: 50, duration: 1000});
           }
 
           console.log('GPX chargé avec succès !');
