@@ -1,0 +1,94 @@
+.container-home {
+  position: relative; /* Permet de positionner le texte par rapport à l'image */
+  background: transparent;
+}
+
+.image1-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80vh;
+  background-image: url('/assets/Images/Paysage2.JPG');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.container-home {
+  position: relative;
+  z-index: 1;
+  margin-top: 80vh; // Le contenu commence sous l'image fixe
+  padding: 32px 0;
+
+  background-color: antiquewhite;
+}
+
+.center-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centre horizontalement et verticalement */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.new-journey-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 2;
+  transition:
+    opacity 1s,
+    visibility 1s;
+  opacity: 1;
+  visibility: visible;
+}
+
+.new-journey-container.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.custom-text {
+  font-size: 64px;
+  margin-bottom: 10px;
+  color: #f7ecde;
+}
+
+.explore-btn {
+  background-color: #f7ecde;
+  border-radius: 15px;
+  height: 50px;
+  width: 250px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: #222;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    transform: scale(1.05);
+    transition: 0.5s;
+  }
+}
+
+.container-home {
+  padding-left: 15vw;
+  padding-right: 15vw;
+}

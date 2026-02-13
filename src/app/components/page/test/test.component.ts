@@ -1,20 +1,20 @@
-import {Component, ElementRef, OnDestroy, OnInit, signal, viewChild} from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
-import {environment} from '../../../../../environment';
+import { environment } from '../../../../../environment';
 
 @Component({
   selector: 'app-test',
   imports: [],
   templateUrl: './test.component.html',
   styleUrl: './test.component.scss',
-  standalone: true
+  standalone: true,
 })
 export class TestComponent implements OnInit, OnDestroy {
   private map = signal<mapboxgl.Map | null>(null);
   private mapContainer = viewChild.required<ElementRef<HTMLDivElement>>('mapContainer');
 
   ngOnInit(): void {
-    (mapboxgl as any).accessToken = environment.MAPBOX_TOKEN_PUBLIC
+    (mapboxgl as any).accessToken = environment.MAPBOX_TOKEN_PUBLIC;
 
     const mapInstance = new mapboxgl.Map({
       container: this.mapContainer().nativeElement,
@@ -35,13 +35,13 @@ export class TestComponent implements OnInit, OnDestroy {
         type: 'raster-dem',
         url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
         tileSize: 512,
-        maxzoom: 14
+        maxzoom: 14,
       });
 
       // Activer le terrain 3D
       mapInstance.setTerrain({
         source: 'mapbox-dem',
-        exaggeration: 1.8
+        exaggeration: 1.8,
       });
 
       // Chargement du GPX
@@ -73,28 +73,31 @@ export class TestComponent implements OnInit, OnDestroy {
             paint: {
               'sky-type': 'atmosphere',
               'sky-atmosphere-sun': [0.0, 90.0],
-              'sky-atmosphere-sun-intensity': 15
-            }
+              'sky-atmosphere-sun-intensity': 15,
+            },
           });
 
           // Marqueurs départ / arrivée
           const coords = geojson.features[0]?.geometry.coordinates || [];
           if (coords.length > 0) {
-            new mapboxgl.Marker({color: '#00ff00'})
+            new mapboxgl.Marker({ color: '#00ff00' })
               .setLngLat(coords[0] as [number, number])
               .setPopup(new mapboxgl.Popup().setText('Départ GR20'))
               .addTo(mapInstance);
 
-            new mapboxgl.Marker({color: '#ff0000'})
+            new mapboxgl.Marker({ color: '#ff0000' })
               .setLngLat(coords[coords.length - 1] as [number, number])
               .setPopup(new mapboxgl.Popup().setText('Arrivée Étape 1'))
               .addTo(mapInstance);
 
             const bounds = coords.reduce(
               (b, c) => b.extend(c as [number, number]),
-              new mapboxgl.LngLatBounds(coords[0] as [number, number], coords[0] as [number, number])
+              new mapboxgl.LngLatBounds(
+                coords[0] as [number, number],
+                coords[0] as [number, number],
+              ),
             );
-            mapInstance.fitBounds(bounds, {padding: 50, duration: 1000});
+            mapInstance.fitBounds(bounds, { padding: 50, duration: 1000 });
           }
 
           console.log('GPX chargé avec succès !');

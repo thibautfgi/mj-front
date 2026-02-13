@@ -26,7 +26,7 @@ Clone the repot and explore the project directory :
 ```bash
 
 
-``` 
+```
 
 ## Local test of our project :
 
@@ -36,11 +36,9 @@ For test our project on local, use the command bellow :
 
 Try it on Postamn for a better view of our API capabilities
 
-
 > **Warning :**
 
 The mapbox tokens is hiding on a .gitignore file. For all acces, you will need to ask the keys to a admin.
-
 
 > ### ** WARNING : ** Sometime, git can modify the sh executable endline and break it. If that happen, you will need to change your encoding of your sh file from CRLF -> LF (bottom right corner of VS CODE).
 

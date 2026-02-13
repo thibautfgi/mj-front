@@ -5,16 +5,14 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-
 }
-
 
 .header-container {
   min-height: 15vh;
   width: 100%;
-  flex-shrink: 0;
-  position: sticky;
+  position: fixed; /* Fixe le header en haut de la page */
   top: 0;
+  z-index: 10; /* Assure qu'il est au-dessus des autres éléments */
 }
 
 .content-containeur {
