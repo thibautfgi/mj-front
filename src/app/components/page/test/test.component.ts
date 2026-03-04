@@ -14,7 +14,7 @@ export class TestComponent implements OnInit, OnDestroy {
   private mapContainer = viewChild.required<ElementRef<HTMLDivElement>>('mapContainer');
 
   ngOnInit(): void {
-    (mapboxgl as any).accessToken = environment.MAPBOX_TO KEN_PUBLIC
+    (mapboxgl as any).accessToken = environment.MAPBOX_TOKEN_PUBLIC
 
     const mapInstance = new mapboxgl.Map({
       container: this.mapContainer().nativeElement,
