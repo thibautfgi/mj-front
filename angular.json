@@ -27,6 +27,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "env.js",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [
@@ -41,6 +46,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
