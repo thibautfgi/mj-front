@@ -21,8 +21,8 @@ export class AuthService {
   // Register
   register(request: SignupRequest): Observable<any> {
     return this.http.post(`${this.baseUrl}/users`, {
-      User_FirstName: request.firstName,
-      User_LastName: request.lastName,
+      User_FirstName: request.firstName || '',
+      User_LastName: request.lastName || '',
       User_Email: request.email,
       User_Password: request.password,
       User_Phone: request.phone || ''

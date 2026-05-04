@@ -1,9 +1,27 @@
 <div class="login-page">
   <div class="login-card">
-    <h2>Prêt à l'exploration ?</h2>
-    <p class="subtitle">Connectez-vous ou créez un compte</p>
+    <h2>{{ mode() === 'login' ? 'Prêt à l\'exploration ?' : 'Créer un compte' }}</h2>
+    <p class="subtitle">
+      {{ mode() === 'login'
+      ? 'Connectez-vous à votre compte'
+      : 'Inscrivez-vous pour commencer l\'aventure' }}
+    </p>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <!-- Switch entre les modes -->
+    <div class="mode-switch">
+      <button
+        [class.active]="mode() === 'login'"
+        (click)="switchMode('login')">
+        Connexion
+      </button>
+      <button
+        [class.active]="mode() === 'signup'"
+        (click)="switchMode('signup')">
+        Inscription
+      </button>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="input-group">
         <input type="email"
                formControlName="email"
@@ -23,23 +41,26 @@
         </div>
       </div>
 
+      <!-- Champ Confirmer mot de passe (visible seulement en inscription) -->
+      <div class="input-group" *ngIf="mode() === 'signup'">
+        <div class="password-wrapper">
+          <input [type]="showConfirmPassword() ? 'text' : 'password'"
+                 formControlName="confirmPassword"
+                 placeholder="Confirmer le mot de passe"
+                 class="input-field">
+          <span class="toggle-icon" (click)="toggleConfirmPassword()">
+            {{ showConfirmPassword() ? '🙈' : '👁️' }}
+          </span>
+        </div>
+      </div>
+
       <button type="submit" class="btn-primary" [disabled]="loginForm.invalid || isLoading()">
-        {{ isLoading() ? 'Connexion en cours...' : 'Connexion' }}
+        {{ isLoading() ? 'Chargement...' : (mode() === 'login' ? 'Se connecter' : 'Créer mon compte') }}
       </button>
     </form>
-
-    <button type="button" class="link-btn" (click)="showSignupModal.set(true)">
-      Créer un compte
-    </button>
 
     <p class="legal-text">
       En continuant, vous acceptez nos <a href="#">Politiques de confidentialité</a>.
     </p>
   </div>
 </div>
-
-<!-- Modal d'inscription -->
-<app-signup-modal
-  *ngIf="showSignupModal()"
-  (closeModal)="showSignupModal.set(false)">
-</app-signup-modal>

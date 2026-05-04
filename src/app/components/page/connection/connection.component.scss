@@ -1,23 +1,22 @@
-
-/* login.component.scss */
+/* ====================== PAGE CONNEXION / INSCRIPTION ====================== */
 
 .login-page {
-  min-height: calc(100vh - 80px - 60px); /* Ajuste selon la hauteur de ton header + footer */
+  min-height: calc(100vh - 80px - 70px); /* Ajustement header + footer */
   display: flex;
   align-items: center;
   justify-content: center;
   background: url('/assets/Images/Paysage2.JPG') no-repeat center center fixed;
   background-size: cover;
   padding: 20px 15px;
+  position: relative;
 }
 
-/* Card */
 .login-card {
-  background: rgba(255, 240, 224, 0.92);
+  background: rgba(255, 240, 224, 0.93);
   backdrop-filter: blur(12px);
-  padding: 48px 40px;
+  padding: 45px 40px;
   border-radius: 32px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
   max-width: 420px;
   width: 100%;
   text-align: center;
@@ -27,15 +26,45 @@
   margin: 0 0 8px 0;
   font-size: 28px;
   color: #1f2a2e;
+  font-weight: 700;
 }
 
 .subtitle {
   color: #444;
-  margin-bottom: 32px;
-  font-size: 16.5px;
+  margin-bottom: 25px;
+  font-size: 16px;
 }
 
-/* Inputs, Buttons, etc. (même style que précédemment) */
+/* ==================== SWITCH CONNEXION / INSCRIPTION ==================== */
+.mode-switch {
+  display: flex;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 9999px;
+  padding: 4px;
+  margin-bottom: 30px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mode-switch button {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: #555;
+}
+
+.mode-switch button.active {
+  background: #3891A6;
+  color: white;
+  box-shadow: 0 4px 10px rgba(56, 145, 166, 0.3);
+}
+
+/* ==================== FORMULAIRE ==================== */
 .input-group {
   margin-bottom: 18px;
   position: relative;
@@ -49,10 +78,13 @@
   background: #CEEBBF;
   font-size: 16px;
   outline: none;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .input-field:focus {
   box-shadow: 0 0 0 4px rgba(56, 145, 166, 0.3);
+  transform: translateY(-1px);
 }
 
 .password-wrapper {
@@ -66,12 +98,14 @@
   transform: translateY(-50%);
   font-size: 22px;
   cursor: pointer;
+  user-select: none;
 }
 
+/* Bouton principal */
 .btn-primary {
   width: 100%;
   padding: 16px;
-  margin: 12px 0 10px 0;
+  margin: 15px 0 10px 0;
   background: #3891A6;
   color: white;
   border: none;
@@ -79,27 +113,41 @@
   font-size: 17px;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .btn-primary:hover:not(:disabled) {
   background: #2b7a8c;
+  transform: translateY(-2px);
 }
 
-.link-btn {
-  background: none;
-  border: none;
-  color: #3891A6;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 8px;
+.btn-primary:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
 }
 
+/* Texte légal */
 .legal-text {
-  margin-top: 28px;
-  font-size: 14.5px;
+  margin-top: 25px;
+  font-size: 14px;
   color: #555;
+  line-height: 1.5;
 }
 
 .legal-text a {
   color: #3891A6;
+  text-decoration: underline;
+}
+
+/* ====================== RESPONSIVE ====================== */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 35px 25px;
+    border-radius: 24px;
+  }
+
+  .mode-switch button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
 }
