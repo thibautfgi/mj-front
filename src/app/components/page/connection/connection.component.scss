@@ -1,0 +1,105 @@
+
+/* login.component.scss */
+
+.login-page {
+  min-height: calc(100vh - 80px - 60px); /* Ajuste selon la hauteur de ton header + footer */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/assets/Images/Paysage2.JPG') no-repeat center center fixed;
+  background-size: cover;
+  padding: 20px 15px;
+}
+
+/* Card */
+.login-card {
+  background: rgba(255, 240, 224, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 48px 40px;
+  border-radius: 32px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-card h2 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  color: #1f2a2e;
+}
+
+.subtitle {
+  color: #444;
+  margin-bottom: 32px;
+  font-size: 16.5px;
+}
+
+/* Inputs, Buttons, etc. (même style que précédemment) */
+.input-group {
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.input-field {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 9999px;
+  background: #CEEBBF;
+  font-size: 16px;
+  outline: none;
+}
+
+.input-field:focus {
+  box-shadow: 0 0 0 4px rgba(56, 145, 166, 0.3);
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  margin: 12px 0 10px 0;
+  background: #3891A6;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2b7a8c;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #3891A6;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.legal-text {
+  margin-top: 28px;
+  font-size: 14.5px;
+  color: #555;
+}
+
+.legal-text a {
+  color: #3891A6;
+}

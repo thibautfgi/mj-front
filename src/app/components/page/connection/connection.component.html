@@ -1,4 +1,45 @@
-<div class="container-home">
+<div class="login-page">
+  <div class="login-card">
+    <h2>Prêt à l'exploration ?</h2>
+    <p class="subtitle">Connectez-vous ou créez un compte</p>
 
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="input-group">
+        <input type="email"
+               formControlName="email"
+               placeholder="Adresse e-mail"
+               class="input-field">
+      </div>
 
+      <div class="input-group">
+        <div class="password-wrapper">
+          <input [type]="showPassword() ? 'text' : 'password'"
+                 formControlName="password"
+                 placeholder="Mot de passe"
+                 class="input-field">
+          <span class="toggle-icon" (click)="togglePassword()">
+            {{ showPassword() ? '🙈' : '👁️' }}
+          </span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loginForm.invalid || isLoading()">
+        {{ isLoading() ? 'Connexion en cours...' : 'Connexion' }}
+      </button>
+    </form>
+
+    <button type="button" class="link-btn" (click)="showSignupModal.set(true)">
+      Créer un compte
+    </button>
+
+    <p class="legal-text">
+      En continuant, vous acceptez nos <a href="#">Politiques de confidentialité</a>.
+    </p>
+  </div>
 </div>
+
+<!-- Modal d'inscription -->
+<app-signup-modal
+  *ngIf="showSignupModal()"
+  (closeModal)="showSignupModal.set(false)">
+</app-signup-modal>

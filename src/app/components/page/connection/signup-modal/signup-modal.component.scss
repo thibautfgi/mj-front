@@ -1,0 +1,99 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: rgba(255, 240, 224, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 40px 35px;
+  border-radius: 28px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+  animation: modalPop 0.4s ease;
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.8) translateY(40px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 26px;
+  color: #1f2a2e;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-btn:hover {
+  color: #e74c3c;
+}
+
+/* Styles réutilisés */
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 9999px;
+  background: #CEEBBF;
+  font-size: 16px;
+  outline: none;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  margin-top: 12px;
+  background: #3891A6;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2b7a8c;
+}
