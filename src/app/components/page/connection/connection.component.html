@@ -7,7 +7,7 @@
       : 'Inscrivez-vous pour commencer l\'aventure' }}
     </p>
 
-    <!-- Switch -->
+    <!-- Switch Connexion / Inscription -->
     <div class="mode-switch">
       <button
         [class.active]="mode() === 'login'"
@@ -36,7 +36,7 @@
                  placeholder="Mot de passe"
                  class="input-field">
           <span class="toggle-icon" (click)="togglePassword()">
-            {{ showPassword() ? '🙈' : '👁️' }}
+            {{ showPassword() ? '●' : '👁' }}
           </span>
         </div>
       </div>
@@ -47,7 +47,7 @@
     </form>
 
     <p class="legal-text">
-      En continuant, vous acceptez nos <a href="">Politiques de confidentialité</a>.
+      En continuant, vous acceptez nos <a href="#">Politiques de confidentialité</a>.
     </p>
   </div>
 </div>
