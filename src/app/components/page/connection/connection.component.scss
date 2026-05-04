@@ -1,3 +1,5 @@
+/* ====================== PAGE CONNEXION / INSCRIPTION ====================== */
+
 .login-page {
   min-height: calc(100vh - 80px - 70px);
   display: flex;
@@ -31,7 +33,7 @@ h2 {
   font-size: 16px;
 }
 
-/* Switch */
+/* Switch Connexion / Inscription */
 .mode-switch {
   display: flex;
   background: rgba(255, 255, 255, 0.6);
@@ -57,14 +59,14 @@ h2 {
   color: white;
 }
 
-/* Inputs - Même taille garantie */
+/* ==================== INPUTS - Même taille garantie ==================== */
 .input-group {
   margin-bottom: 18px;
   position: relative;
 }
 
 .input-field {
-  width: 100%;
+  width: 100% !important;
   padding: 16px 20px;
   border: none;
   border-radius: 9999px;
@@ -72,17 +74,24 @@ h2 {
   font-size: 16px;
   outline: none;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
 }
 
 .input-field:focus {
   box-shadow: 0 0 0 4px rgba(56, 145, 166, 0.3);
 }
 
-/* Icône visibilité simplifiée */
+/* Password field specific */
 .password-wrapper {
   position: relative;
+  width: 100%;
 }
 
+.password-wrapper .input-field {
+  padding-right: 50px;   /* Espace pour l'icône */
+}
+
+/* Icône visibilité */
 .toggle-icon {
   position: absolute;
   right: 18px;
@@ -90,8 +99,8 @@ h2 {
   transform: translateY(-50%);
   font-size: 20px;
   cursor: pointer;
-  user-select: none;
   color: #555;
+  z-index: 2;
 }
 
 /* Bouton */
