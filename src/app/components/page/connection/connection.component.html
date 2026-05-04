@@ -7,7 +7,7 @@
       : 'Inscrivez-vous pour commencer l\'aventure' }}
     </p>
 
-    <!-- Switch entre les modes -->
+    <!-- Switch -->
     <div class="mode-switch">
       <button
         [class.active]="mode() === 'login'"
@@ -41,26 +41,13 @@
         </div>
       </div>
 
-      <!-- Champ Confirmer mot de passe (visible seulement en inscription) -->
-      <div class="input-group" *ngIf="mode() === 'signup'">
-        <div class="password-wrapper">
-          <input [type]="showConfirmPassword() ? 'text' : 'password'"
-                 formControlName="confirmPassword"
-                 placeholder="Confirmer le mot de passe"
-                 class="input-field">
-          <span class="toggle-icon" (click)="toggleConfirmPassword()">
-            {{ showConfirmPassword() ? '🙈' : '👁️' }}
-          </span>
-        </div>
-      </div>
-
       <button type="submit" class="btn-primary" [disabled]="loginForm.invalid || isLoading()">
         {{ isLoading() ? 'Chargement...' : (mode() === 'login' ? 'Se connecter' : 'Créer mon compte') }}
       </button>
     </form>
 
     <p class="legal-text">
-      En continuant, vous acceptez nos <a href="#">Politiques de confidentialité</a>.
+      En continuant, vous acceptez nos <a href="">Politiques de confidentialité</a>.
     </p>
   </div>
 </div>

@@ -5,7 +5,8 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
-
+  background: url('/assets/Images/Paysage2.JPG') no-repeat center center fixed;
+  background-size: cover;
 }
 
 
@@ -23,12 +24,6 @@
   flex: 1;
 }
 
-.footer-container {
-  min-height: 9vh;
-  width: 100%;
-  flex-shrink: 0;
-  display: flex;
-}
 
 .footer-container app-footer {
   display: flex;

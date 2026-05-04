@@ -2,8 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginCredentials, SignupRequest } from '../../communs/interfaces/auth.interface';
 import { AuthService } from '../../communs/services/auth.services';
+import { LoginCredentials, SignupRequest } from '../../communs/interfaces/auth.interface';
 
 
 @Component({
@@ -18,58 +18,42 @@ export class ConnectionComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  // Mode : 'login' ou 'signup'
   mode = signal<'login' | 'signup'>('login');
 
   loginForm: FormGroup;
   showPassword = signal(false);
-  showConfirmPassword = signal(false);
   isLoading = signal(false);
 
   constructor() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['']
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  // Changer de mode (Connexion / Inscription)
   switchMode(newMode: 'login' | 'signup') {
     this.mode.set(newMode);
-    if (newMode === 'signup') {
-      this.loginForm.get('confirmPassword')?.setValidators([Validators.required]);
-    } else {
-      this.loginForm.get('confirmPassword')?.clearValidators();
-    }
-    this.loginForm.get('confirmPassword')?.updateValueAndValidity();
   }
 
   togglePassword() {
     this.showPassword.update(v => !v);
   }
 
-  toggleConfirmPassword() {
-    this.showConfirmPassword.update(v => !v);
-  }
-
   onSubmit() {
     if (this.loginForm.invalid) return;
 
     this.isLoading.set(true);
-    const formValue = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
     if (this.mode() === 'login') {
-      const credentials: LoginCredentials = {
-        email: formValue.email,
-        password: formValue.password
-      };
+      // Connexion
+      const credentials: LoginCredentials = { email, password };
 
       this.authService.login(credentials).subscribe({
         next: (users) => {
           const user = users.find((u: any) =>
-            u.User_Email?.toLowerCase() === credentials.email.toLowerCase() &&
-            u.User_Password === credentials.password
+            u.User_Email?.toLowerCase() === email.toLowerCase() &&
+            u.User_Password === password
           );
 
           if (user) {
@@ -85,18 +69,12 @@ export class ConnectionComponent {
       });
 
     } else {
-      // Mode Inscription
-      if (formValue.password !== formValue.confirmPassword) {
-        alert('Les mots de passe ne correspondent pas');
-        this.isLoading.set(false);
-        return;
-      }
-
+      // Inscription (simplifiée)
       const signupData: SignupRequest = {
-        firstName: '',      // non demandé
-        lastName: '',       // non demandé
-        email: formValue.email,
-        password: formValue.password,
+        firstName: '',
+        lastName: '',
+        email,
+        password,
         phone: ''
       };
 
