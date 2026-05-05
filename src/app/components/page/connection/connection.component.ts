@@ -14,6 +14,11 @@ import { LoginCredentials, SignupRequest } from '../../communs/interfaces/auth.i
   styleUrls: ['./connection.component.scss']
 })
 export class ConnectionComponent {
+      // Vérifie si le mot de passe est trop court
+      get passwordTooShort(): boolean {
+        const pwd = this.loginForm.get('password')?.value;
+        return typeof pwd === 'string' && pwd.length > 0 && pwd.length < 6;
+      }
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -33,6 +38,8 @@ export class ConnectionComponent {
 
   switchMode(newMode: 'login' | 'signup') {
     this.mode.set(newMode);
+    // Réinitialise uniquement le champ password lors du changement de mode
+    this.loginForm.get('password')?.reset();
   }
 
   togglePassword() {
@@ -60,12 +67,16 @@ export class ConnectionComponent {
             document.cookie = `userId=${user.User_Id}; path=/; max-age=${60 * 60 * 24 * 7}`;
             alert('✅ Connexion réussie !');
             this.router.navigate(['/explorer']);
+            this.isLoading.set(false);
           } else {
             alert('❌ E-mail ou mot de passe incorrect');
+            this.isLoading.set(false);
           }
         },
-        error: () => alert('Erreur de connexion au serveur'),
-        complete: () => this.isLoading.set(false)
+        error: () => {
+          alert('Erreur de connexion au serveur');
+          this.isLoading.set(false);
+        }
       });
 
     } else {
@@ -82,9 +93,12 @@ export class ConnectionComponent {
         next: () => {
           alert('✅ Compte créé avec succès ! Vous pouvez maintenant vous connecter.');
           this.switchMode('login'); // Retour automatique en mode connexion
+          this.isLoading.set(false);
         },
-        error: () => alert('❌ Erreur lors de la création du compte'),
-        complete: () => this.isLoading.set(false)
+        error: () => {
+          alert('❌ Erreur lors de la création du compte');
+          this.isLoading.set(false);
+        }
       });
     }
   }

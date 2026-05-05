@@ -1,1 +1,8 @@
-<button aria-label="bouton" class="btn" type="button">{{ textButton }}</button>
+<button
+  aria-label="bouton"
+  class="btn"
+  type="button"
+  [ngStyle]="customColor ? {'background': customColor} : {}"
+>
+  {{ textButton }}
+</button>

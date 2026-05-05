@@ -1,5 +1,4 @@
 .btn {
-  background-color: #CEE5BF;
   border-radius: 15px;
   height: 35px;
   width: 140px;
@@ -15,4 +14,8 @@
     transform: scale(1.1);
     transition: 0.5s;
   }
+}
+
+.btn[ngStyle] {
+  /* Si customColor est appliqué, la couleur inline a priorité */
 }

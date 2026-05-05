@@ -41,7 +41,10 @@
         </div>
       </div>
 
-      <button type="submit" class="btn-primary" [disabled]="loginForm.invalid || isLoading()">
+      <button type="submit"
+              class="btn-primary"
+              [class.btn-disabled]="passwordTooShort"
+              [disabled]="loginForm.invalid || isLoading() || passwordTooShort">
         {{ isLoading() ? 'Chargement...' : (mode() === 'login' ? 'Se connecter' : 'Créer mon compte') }}
       </button>
     </form>

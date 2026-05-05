@@ -5,11 +5,11 @@ import {environment} from '../../../../../environments/environment';
 @Component({
   selector: 'app-test',
   imports: [],
-  templateUrl: './test.component.html',
-  styleUrl: './test.component.scss',
+  templateUrl: './maps.component.html',
+  styleUrl: './maps.component.scss',
   standalone: true
 })
-export class TestComponent implements OnInit, OnDestroy {
+export class MapsComponent implements OnInit, OnDestroy {
   private map = signal<mapboxgl.Map | null>(null);
   private mapContainer = viewChild.required<ElementRef<HTMLDivElement>>('mapContainer');
 

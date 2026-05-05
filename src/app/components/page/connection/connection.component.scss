@@ -117,7 +117,15 @@ h2 {
   cursor: pointer;
 }
 
-.btn-primary:hover:not(:disabled) {
+
+.btn-primary.btn-disabled,
+.btn-primary:disabled {
+  background: #fbf6f1 !important;
+  color: #bbb !important;
+  cursor: default;
+}
+
+.btn-primary:hover:not(:disabled):not(.btn-disabled) {
   background: #2b7a8c;
 }
 

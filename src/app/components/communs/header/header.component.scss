@@ -16,11 +16,11 @@
   justify-content: flex-end;
   align-items: center;
   height: 100%;
-  gap: 100px;
+  gap: 50px;
   min-width: 40%;
 }
 
-.container-button-middle {
+.container-button-center {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -35,7 +35,7 @@
   justify-content: flex-start;
   align-items: center;
   height: 100%;
-  gap: 100px;
+  gap: 50px;
   min-width: 40%;
 }
 
@@ -47,4 +47,10 @@
     transform: scale(1.05);
     transition: 0.5s;
   }
+}
+
+a {
+  text-decoration: none;
+  color: black;
+
 }
