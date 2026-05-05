@@ -8,24 +8,27 @@ import { LoginCredentials, SignupRequest, User } from '../interfaces/auth.interf
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api';   // ← Aligné avec ton backend
+  private baseUrl = '/api'; // Utilise le proxy Angular
 
   constructor(private http: HttpClient) {
   }
 
-  // Login (méthode actuelle dans ton code)
-  login(credentials: LoginCredentials): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}/users`);
+  // Connexion
+  login(credentials: LoginCredentials): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/login`, {
+      userEmail: credentials.email,
+      userPassword: credentials.password
+    });
   }
 
-  // Register
+  // Inscription
   register(request: SignupRequest): Observable<any> {
-    return this.http.post(`${this.baseUrl}/users`, {
-      User_FirstName: request.firstName || '',
-      User_LastName: request.lastName || '',
-      User_Email: request.email,
-      User_Password: request.password,
-      User_Phone: request.phone || ''
+    return this.http.post(`${this.baseUrl}/auth/register`, {
+      userFirstName: request.firstName || '',
+      userLastName: request.lastName || '',
+      userEmail: request.email,
+      userPassword: request.password,
+      userPhone: request.phone || ''
     });
   }
 }
