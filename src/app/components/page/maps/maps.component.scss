@@ -1,7 +1,7 @@
-.container-maps {
-  height: 100%;
-  width: 100%;
-  flex: 1;
+:host {
+  display: block;
+  width: 100vw;
+  height: 90vh; // Hauteur complète de la fenêtre
 }
 
 .map-container {
