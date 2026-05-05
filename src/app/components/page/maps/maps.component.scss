@@ -1,11 +1,55 @@
+.maps-tabs-row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16.666%; /* col-2 sur 12 colonnes */
+  min-width: 180px;
+  max-width: 300px;
+  height: 60%; /* Prend 70% de la hauteur de la carte, même si vide */
+  padding-left: 5vw;
+  padding-top: 20vh;
+  padding-bot: 10vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  z-index: 10;
+  /* Pour overlay au-dessus de la carte */
+}
+
+.map-container-row {
+  width: 100%;
+  height: 100%;
+  /* On retire flex inutile */
+}
+
 :host {
   display: block;
-  width: 100vw;
-  height: 90vh; // Hauteur complète de la fenêtre
+  width: 100%;
+  height: 100%;            /* Prend toute la hauteur du content-containeur */
+}
+
+.container-maps {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  /* On retire flex et align-items pour laisser la carte occuper tout l'espace */
 }
 
 .map-container {
   width: 100%;
   height: 100%;
   position: relative;
+}
+
+.maps-tabs-content {
+  background: #CEE5BF;
+  border-radius: 18px;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

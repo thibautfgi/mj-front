@@ -1,10 +1,13 @@
 import {Component, ElementRef, OnDestroy, OnInit, signal, viewChild} from '@angular/core';
 import mapboxgl from 'mapbox-gl';
 import {environment} from '../../../../../environments/environment';
+import { MapsTabs } from './maps-tabs/maps-tabs';
 
 @Component({
   selector: 'app-test',
-  imports: [],
+  imports: [
+    MapsTabs,
+  ],
   templateUrl: './maps.component.html',
   styleUrl: './maps.component.scss',
   standalone: true

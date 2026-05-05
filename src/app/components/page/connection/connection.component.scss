@@ -1,13 +1,13 @@
 /* ====================== PAGE CONNEXION / INSCRIPTION ====================== */
 
 .login-page {
-  min-height: calc(100vh - 80px - 70px);
+  height: calc(100vh - 10vh);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('/assets/Images/Paysage2.JPG') no-repeat center center fixed;
   background-size: cover;
-  padding: 20px 15px;
+  padding: 20px 15px 0 15px;
+  box-sizing: border-box;
 }
 
 .login-card {
