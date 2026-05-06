@@ -2,11 +2,13 @@ import {Component, ElementRef, OnDestroy, OnInit, signal, viewChild} from '@angu
 import mapboxgl from 'mapbox-gl';
 import {environment} from '../../../../../environments/environment';
 import { MapsTabs } from './maps-tabs/maps-tabs';
+import { MapsButtons } from './maps-buttons/maps-buttons';
 
 @Component({
   selector: 'app-test',
   imports: [
     MapsTabs,
+    MapsButtons,
   ],
   templateUrl: './maps.component.html',
   styleUrl: './maps.component.scss',

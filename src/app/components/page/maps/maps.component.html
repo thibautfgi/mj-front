@@ -1,8 +1,19 @@
-<div class="container-maps">
-  <div class="maps-tabs-row">
+<div class="maps-wrapper">
+
+
+  <!-- Sidebar Tabs (gauche) -->
+  <div class="maps-tabs-container">
     <app-maps-tabs></app-maps-tabs>
   </div>
-  <div class="map-container-row">
-    <div #mapContainer class="map-container"></div>
+
+  <!-- Sidebar Buttons (droite) -->
+  <div class="maps-buttons-container">
+    <app-maps-buttons></app-maps-buttons>
   </div>
+
+  <!-- Carte -->
+  <div class="map-container">
+    <div #mapContainer class="map-inner"></div>
+  </div>
+
 </div>
