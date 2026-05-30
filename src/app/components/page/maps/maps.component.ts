@@ -116,7 +116,7 @@ export class MapsComponent implements OnInit, OnDestroy {
       `&LAYERS=${environment.snowLayerId}` +
       `&STYLES=&FORMAT=image/png&TRANSPARENT=true` +
       `&CRS=EPSG:3857&WIDTH=512&HEIGHT=512` +
-      `&TIME=2024-02-01/2024-02-28` +
+      `&TIME=2026-05-01/2026-05-28` +
       `&MAXCC=40` +
       `&BBOX={bbox-epsg-3857}`
     );
