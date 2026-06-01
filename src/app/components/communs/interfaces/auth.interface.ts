@@ -1,13 +1,3 @@
-
-export interface User {
-  User_Id?: number;
-  User_FirstName: string;
-  User_LastName: string;
-  User_Email: string;
-  User_Password: string;
-  User_Phone?: string;
-}
-
 export interface LoginCredentials {
   email: string;
   password: string;
@@ -21,8 +11,18 @@ export interface SignupRequest {
   phone?: string;
 }
 
+/** Réponse du backend pour /login et /register */
 export interface AuthResponse {
-  success: boolean;
-  message?: string;
-  user?: User;
+  userToken: string;
+  userEmail: string;
+  userFirstName: string;
+  userLastName: string;
 }
+
+/** Réponse du backend pour /whoiam */
+export interface WhoiamResponse {
+  userEmail: string;
+  userFirstName: string;
+  userLastName: string;
+}
+

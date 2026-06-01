@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../communs/services/auth.services';
 import { LoginCredentials, SignupRequest } from '../../communs/interfaces/auth.interface';
 
-
 @Component({
   selector: 'app-connection',
   standalone: true,
@@ -14,17 +13,16 @@ import { LoginCredentials, SignupRequest } from '../../communs/interfaces/auth.i
   styleUrls: ['./connection.component.scss']
 })
 export class ConnectionComponent {
-      // Vérifie si le mot de passe est trop court
-      get passwordTooShort(): boolean {
-        const pwd = this.loginForm.get('password')?.value;
-        return typeof pwd === 'string' && pwd.length > 0 && pwd.length < 6;
-      }
+  get passwordTooShort(): boolean {
+    const pwd = this.loginForm.get('password')?.value;
+    return typeof pwd === 'string' && pwd.length > 0 && pwd.length < 6;
+  }
+
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   private router = inject(Router);
 
   mode = signal<'login' | 'signup'>('login');
-
   loginForm: FormGroup;
   showPassword = signal(false);
   isLoading = signal(false);
@@ -38,7 +36,6 @@ export class ConnectionComponent {
 
   switchMode(newMode: 'login' | 'signup') {
     this.mode.set(newMode);
-    // Réinitialise uniquement le champ password lors du changement de mode
     this.loginForm.get('password')?.reset();
   }
 
@@ -53,34 +50,23 @@ export class ConnectionComponent {
     const { email, password } = this.loginForm.value;
 
     if (this.mode() === 'login') {
-      // Connexion
       const credentials: LoginCredentials = { email, password };
 
       this.authService.login(credentials).subscribe({
-        next: (users) => {
-          const user = users.find((u: any) =>
-            u.User_Email?.toLowerCase() === email.toLowerCase() &&
-            u.User_Password === password
-          );
-
-          if (user) {
-            document.cookie = `userId=${user.User_Id}; path=/; max-age=${60 * 60 * 24 * 7}`;
-            alert('✅ Connexion réussie !');
-            this.router.navigate(['/explorer']);
-            this.isLoading.set(false);
-          } else {
-            alert('❌ E-mail ou mot de passe incorrect');
-            this.isLoading.set(false);
-          }
+        next: (res) => {
+          // Le token est déjà stocké dans localStorage via le service
+          alert(`✅ Connexion réussie ! Bonjour ${res.userFirstName}`);
+          this.router.navigate(['/explorer']);
+          this.isLoading.set(false);
         },
-        error: () => {
-          alert('Erreur de connexion au serveur');
+        error: (err) => {
+          const msg = err?.error?.message || 'E-mail ou mot de passe incorrect';
+          alert(`❌ ${msg}`);
           this.isLoading.set(false);
         }
       });
 
     } else {
-      // Inscription (simplifiée)
       const signupData: SignupRequest = {
         firstName: '',
         lastName: '',
@@ -92,14 +78,17 @@ export class ConnectionComponent {
       this.authService.register(signupData).subscribe({
         next: () => {
           alert('✅ Compte créé avec succès ! Vous pouvez maintenant vous connecter.');
-          this.switchMode('login'); // Retour automatique en mode connexion
+          this.switchMode('login');
           this.isLoading.set(false);
         },
-        error: () => {
-          alert('❌ Erreur lors de la création du compte');
+        error: (err) => {
+          const msg = err?.error?.message || 'Erreur lors de la création du compte';
+          alert(`❌ ${msg}`);
           this.isLoading.set(false);
         }
       });
     }
   }
 }
+
+

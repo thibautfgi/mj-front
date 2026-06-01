@@ -12,7 +12,7 @@ import mapboxgl from 'mapbox-gl';
 export class MapsButtons {
   @Input() map: mapboxgl.Map | null = null;
 
-  snowVisible = true;
+  snowVisible = false;
 
   toggleSnow(): void {
     if (!this.map) return;
