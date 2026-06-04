@@ -22,6 +22,9 @@ export class ConnectionComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  errorMessage = signal<string>('');
+  successMessage = signal<string>('');
+
   mode = signal<'login' | 'signup'>('login');
   loginForm: FormGroup;
   showPassword = signal(false);
@@ -47,25 +50,21 @@ export class ConnectionComponent {
     if (this.loginForm.invalid) return;
 
     this.isLoading.set(true);
+    this.errorMessage.set('');
     const { email, password } = this.loginForm.value;
 
     if (this.mode() === 'login') {
-      const credentials: LoginCredentials = { email, password };
-
-      this.authService.login(credentials).subscribe({
+      this.authService.login({ email, password }).subscribe({
         next: (res) => {
-          // Le token est déjà stocké dans localStorage via le service
-          alert(`✅ Connexion réussie ! Bonjour ${res.userFirstName}`);
-          this.router.navigate(['/explorer']);
           this.isLoading.set(false);
+          this.router.navigate(['/maps']); // ✅ Redirection silencieuse, plus d'alert()
         },
         error: (err) => {
-          const msg = err?.error?.message || 'E-mail ou mot de passe incorrect';
-          alert(`❌ ${msg}`);
           this.isLoading.set(false);
+          // ✅ Affichage dans le template, pas en popup
+          this.errorMessage.set(err?.error?.message || 'E-mail ou mot de passe incorrect');
         }
       });
-
     } else {
       const signupData: SignupRequest = {
         firstName: '',

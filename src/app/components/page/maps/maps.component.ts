@@ -56,6 +56,7 @@ export class MapsComponent implements OnInit, OnDestroy {
         id: 'sentinel-snow-layer',
         type: 'raster',
         source: 'sentinel-snow',
+        layout: { visibility: 'none' },
         paint: { 'raster-opacity': 0.85 }
       });
 

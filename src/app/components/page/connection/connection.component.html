@@ -50,7 +50,9 @@
     </form>
 
     <p class="legal-text">
-      En continuant, vous acceptez nos <a href="#">Politiques de confidentialité</a>.
+      @if (errorMessage()) {
+        <div class="error-banner">{{ errorMessage() }}</div>
+      }
     </p>
   </div>
 </div>
