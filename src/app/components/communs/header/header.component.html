@@ -24,9 +24,17 @@
 </a>
 
 
+
+    @if (authService.user(); as user) {
+      <span>{{ user.userFirstName }} {{ user.userLastName }}</span>
+      <button (click)="authService.logout()">Déconnexion</button>
+    } @else {
+
     <a href="/login">
-    <app-custom-buttons customColor="#3891a6" textButton="Se connecter"></app-custom-buttons>
-    </a>
+<app-custom-buttons customColor="#3891a6" textButton="Se connecter"></app-custom-buttons>
+</a>
+    }
+
 
   </div>
 

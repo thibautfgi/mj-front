@@ -1,4 +1,3 @@
-// auth.services.ts
 import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
@@ -8,12 +7,14 @@ import { environment } from '../../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly baseUrl = environment.authApiUrl+'/api/auth';
+  private readonly baseUrl = environment.authApiUrl + '/api/auth';
   private readonly TOKEN_KEY = environment.tokenKey;
 
-  // ✅ Signal réactif — les composants se mettent à jour automatiquement
   private _isLoggedIn = signal<boolean>(this.hasValidToken());
+  private _user = signal<WhoiamResponse | null>(null); // ← signal user
+
   readonly isAuthenticated = computed(() => this._isLoggedIn());
+  readonly user = this._user.asReadonly(); // ← exposé en lecture seule
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -44,13 +45,14 @@ export class AuthService {
     );
   }
 
-  // ✅ Plus besoin d'ajouter le header manuellement — l'intercepteur s'en charge
   whoiam(): Observable<WhoiamResponse> {
-    return this.http.get<WhoiamResponse>(`${this.baseUrl}/whoiam`);
+    return this.http.get<WhoiamResponse>(`${this.baseUrl}/whoiam`).pipe(
+      tap(res => this._user.set(res)) // ← stocke dans le signal
+    );
   }
 
   getToken(): string | null {
-    return sessionStorage.getItem(this.TOKEN_KEY); // ✅ sessionStorage : plus sûr que localStorage
+    return sessionStorage.getItem(this.TOKEN_KEY);
   }
 
   isLoggedIn(): boolean {
@@ -60,7 +62,8 @@ export class AuthService {
   logout(): void {
     sessionStorage.removeItem(this.TOKEN_KEY);
     this._isLoggedIn.set(false);
-    // Navigation gérée par l'appelant ou l'intercepteur
+    this._user.set(null); // ← vide le signal user
+    this.router.navigate(['/connection']);
   }
 
   private saveToken(token: string): void {
@@ -71,7 +74,6 @@ export class AuthService {
     const token = sessionStorage.getItem(this.TOKEN_KEY);
     if (!token) return false;
     try {
-      // Vérification basique de l'expiration côté client (sans vérifier la signature)
       const payload = JSON.parse(atob(token.split('.')[1]));
       return payload.exp * 1000 > Date.now();
     } catch {
