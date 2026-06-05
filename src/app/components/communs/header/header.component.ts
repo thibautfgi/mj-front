@@ -10,12 +10,9 @@ import { AuthService } from '../services/auth.services';
   styleUrl: './header.component.scss',
   standalone: true
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   protected authService = inject(AuthService);
 
-  ngOnInit(): void {
-    if (this.authService.isLoggedIn()) {
-      this.authService.whoiam().subscribe(); // ← le tap() du service remplit le signal
-    }
-  }
+
+
 }

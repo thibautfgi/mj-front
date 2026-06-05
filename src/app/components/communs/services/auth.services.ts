@@ -1,9 +1,9 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginCredentials, SignupRequest, AuthResponse, WhoiamResponse } from '../interfaces/auth.interface';
 import { environment } from '../../../../../environments/environment';
+import { Observable, tap, catchError, of, switchMap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(credentials: LoginCredentials): Observable<AuthResponse> {
+  login(credentials: LoginCredentials): Observable<WhoiamResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/login`, {
       userEmail: credentials.email,
       userPassword: credentials.password
@@ -26,11 +26,12 @@ export class AuthService {
       tap((res: AuthResponse) => {
         this.saveToken(res.userToken);
         this._isLoggedIn.set(true);
-      })
+      }),
+      switchMap(() => this.whoiam())
     );
   }
 
-  register(request: SignupRequest): Observable<AuthResponse> {
+  register(request: SignupRequest): Observable<WhoiamResponse> {
     return this.http.post<AuthResponse>(`${this.baseUrl}/register`, {
       userFirstName: request.firstName || '',
       userLastName: request.lastName || '',
@@ -41,7 +42,8 @@ export class AuthService {
       tap((res: AuthResponse) => {
         this.saveToken(res.userToken);
         this._isLoggedIn.set(true);
-      })
+      }),
+      switchMap(() => this.whoiam())
     );
   }
 
@@ -63,7 +65,7 @@ export class AuthService {
     sessionStorage.removeItem(this.TOKEN_KEY);
     this._isLoggedIn.set(false);
     this._user.set(null); // ← vide le signal user
-    this.router.navigate(['/connection']);
+    this.router.navigate(['/login']);
   }
 
   private saveToken(token: string): void {
@@ -80,4 +82,19 @@ export class AuthService {
       return false;
     }
   }
+
+
+
+initUser(): Observable<WhoiamResponse | null> {
+  if (!this.hasValidToken()) {
+  return of(null); // pas de token → app charge directement
+}
+return this.whoiam().pipe(
+  catchError(() => {
+    this.logout(); // token expiré côté serveur → nettoyage silencieux
+    return of(null);
+  })
+);
+}
+
 }

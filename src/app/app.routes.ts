@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/page/home/home.component';
-import { ConnectionComponent } from './components/page/connection/connection.component';
+import { LoginComponent } from './components/page/login/login.component';
 import { NotFoundComponent } from './components/page/not-found/not-found.component';
 import { authGuard } from './components/communs/guards/auth.guard';
 
@@ -19,7 +19,7 @@ export const routes: Routes = [
   {
     // PUBLIC
     path: 'login',
-    component: ConnectionComponent
+    component: LoginComponent
   },
   {
     path: 'maps',

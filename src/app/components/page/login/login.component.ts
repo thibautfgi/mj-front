@@ -9,10 +9,10 @@ import { LoginCredentials, SignupRequest } from '../../communs/interfaces/auth.i
   selector: 'app-connection',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './connection.component.html',
-  styleUrls: ['./connection.component.scss']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class ConnectionComponent {
+export class LoginComponent {
   get passwordTooShort(): boolean {
     const pwd = this.loginForm.get('password')?.value;
     return typeof pwd === 'string' && pwd.length > 0 && pwd.length < 6;
