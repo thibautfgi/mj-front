@@ -1,0 +1,28 @@
+.btn {
+  border-radius: 10px;
+  height: 38px;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  background: rgba(30, 45, 30, 0.82);
+  color: #d6edcc;
+  border: 1px solid rgba(180, 220, 160, 0.25);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25),
+  inset 0 1px 0 rgba(255,255,255,0.06);
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+    transform: translateY(-2px);
+  }
+}
+
+.btn[ngStyle] {
+  /* Si customColor est appliqué, la couleur inline a priorité */
+}

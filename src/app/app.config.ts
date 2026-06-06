@@ -1,8 +1,8 @@
 import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http'; // ✅ AJOUT
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
-import { authInterceptor } from './components/interceptors/auth.interceptor';
+import { authInterceptor } from './components/communs/interceptors/auth.interceptor';
 import { AuthService } from './components/communs/services/auth.services';
 import { firstValueFrom } from 'rxjs';
 
