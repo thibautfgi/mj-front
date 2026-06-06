@@ -1,5 +1,20 @@
 <div class="maps-buttons-content">
-  <button (click)="toggleSnow()">
-    {{ snowVisible ? '❄ Masquer neige' : '❄ Afficher neige' }}
-  </button>
+
+  <app-custom-buttons-rond
+    [icon]="faSnowflake"
+    [customColor]="snowVisible ? '#1a6b8a' : undefined"
+    ariaLabel="Afficher / masquer la neige"
+    (click)="toggleSnow()">
+  </app-custom-buttons-rond>
+
+  <app-custom-buttons-rond
+    [icon]="faMoon"
+    ariaLabel="Mode nuit">
+  </app-custom-buttons-rond>
+
+  <app-custom-buttons-rond
+    [icon]="faLayerGroup"
+    ariaLabel="Calques">
+  </app-custom-buttons-rond>
+
 </div>

@@ -1,8 +1,8 @@
 <button
-  aria-label="bouton"
   class="btn"
   type="button"
+  [attr.aria-label]="ariaLabel"
   [ngStyle]="customColor ? {'background': customColor} : {}"
 >
-  {{ textButton }}
+  <fa-icon [icon]="icon"></fa-icon>
 </button>
