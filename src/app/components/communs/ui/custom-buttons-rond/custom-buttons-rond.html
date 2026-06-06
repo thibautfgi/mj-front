@@ -1,8 +1,13 @@
-<button
-  class="btn"
-  type="button"
-  [attr.aria-label]="ariaLabel"
-  [ngStyle]="customColor ? {'background': customColor} : {}"
->
-  <fa-icon [icon]="icon"></fa-icon>
-</button>
+<div class="btn-wrapper">
+  <button
+    class="btn"
+    type="button"
+    [attr.aria-label]="ariaLabel"
+    [ngStyle]="customColor ? {'background': customColor} : {}"
+  >
+    <fa-icon [icon]="icon"></fa-icon>
+  </button>
+  @if (tooltip) {
+    <span class="btn-tooltip">{{ tooltip }}</span>
+  }
+</div>

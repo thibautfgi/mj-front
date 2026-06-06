@@ -5,7 +5,10 @@
   </div>
 
   <div class="maps-buttons-container">
-    <app-maps-buttons [map]="mapInstance"></app-maps-buttons>
+    <app-maps-buttons
+      (toggleSnowEvent)="onToggleSnow($event)"
+      (toggleStyleEvent)="onToggleStyle($event)">
+    </app-maps-buttons>
   </div>
 
   <div class="map-container">

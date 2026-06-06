@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import mapboxgl from 'mapbox-gl';
 import { faMoon, faSnowflake, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { CustomButtonsRond } from '../../../communs/ui/custom-buttons-rond/custom-buttons-rond';
 
@@ -12,22 +11,23 @@ import { CustomButtonsRond } from '../../../communs/ui/custom-buttons-rond/custo
   standalone: true,
 })
 export class MapsButtons {
-  @Input() map: mapboxgl.Map | null = null;
-
   snowVisible = false;
+  isSatellite = false; // outdoors au démarrage
 
-  // icônes exposées au template
   faSnowflake = faSnowflake;
   faMoon = faMoon;
   faLayerGroup = faLayerGroup;
 
+  @Output() toggleSnowEvent = new EventEmitter<boolean>();
+  @Output() toggleStyleEvent = new EventEmitter<boolean>();
+
   toggleSnow(): void {
-    if (!this.map) return;
     this.snowVisible = !this.snowVisible;
-    this.map.setLayoutProperty(
-      'sentinel-snow-layer',
-      'visibility',
-      this.snowVisible ? 'visible' : 'none'
-    );
+    this.toggleSnowEvent.emit(this.snowVisible);
+  }
+
+  toggleStyle(): void {
+    this.isSatellite = !this.isSatellite;
+    this.toggleStyleEvent.emit(this.isSatellite);
   }
 }

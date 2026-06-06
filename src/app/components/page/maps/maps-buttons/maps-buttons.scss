@@ -1,12 +1,77 @@
 .maps-buttons-content {
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 15px;
-  gap: 20px;
+  gap: 10px;
 }
 
+.btn-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  &:hover .btn-tooltip {
+    opacity: 1;
+    transform: translateX(0) translateY(-50%);
+    pointer-events: auto;
+  }
+}
+
+.gpx-btn {
+  border-radius: 50%;
+  height: 42px;
+  width: 42px;
+  padding: 0;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  background: rgba(30, 45, 30, 0.82);
+  color: #d6edcc;
+  border: 1px solid rgba(180, 220, 160, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25),
+  inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  input[type="file"] {
+    display: none; // ← caché dans le label
+  }
+
+  &:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-tooltip {
+  position: absolute;
+  right: calc(100% + 10px);
+  left: auto;
+  top: 50%;
+  transform: translateX(-6px) translateY(-50%);
+  white-space: nowrap;
+  background: rgba(30, 45, 30, 0.90);
+  color: #d6edcc;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(180, 220, 160, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: -5px;
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 5px 0 5px 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgba(180, 220, 160, 0.4);
+  }
+}

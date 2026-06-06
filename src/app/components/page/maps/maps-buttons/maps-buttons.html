@@ -1,20 +1,26 @@
 <div class="maps-buttons-content">
 
+
+  <app-custom-buttons-rond
+    [icon]="faLayerGroup"
+    [customColor]="isSatellite ? '#1a6b8a' : undefined"
+    ariaLabel="Changer le style de carte"
+    [tooltip]="isSatellite ? 'Vue terrain' : 'Vue satellite'"
+    (click)="toggleStyle()">
+  </app-custom-buttons-rond>
+
   <app-custom-buttons-rond
     [icon]="faSnowflake"
     [customColor]="snowVisible ? '#1a6b8a' : undefined"
     ariaLabel="Afficher / masquer la neige"
+    [tooltip]="snowVisible ? 'Masquer la neige' : 'Activer la vue neige'"
     (click)="toggleSnow()">
   </app-custom-buttons-rond>
 
   <app-custom-buttons-rond
     [icon]="faMoon"
-    ariaLabel="Mode nuit">
-  </app-custom-buttons-rond>
-
-  <app-custom-buttons-rond
-    [icon]="faLayerGroup"
-    ariaLabel="Calques">
+    ariaLabel="Mode nuit"
+    tooltip="Mode nuit">
   </app-custom-buttons-rond>
 
 </div>
