@@ -1,5 +1,4 @@
-<div class="maps-buttons-content">
-
+<div class="maps-buttons-content" (click)="$event.stopPropagation()">
 
   <app-custom-buttons-rond
     [icon]="faLayerGroup"
@@ -22,5 +21,18 @@
     ariaLabel="Mode nuit"
     tooltip="Mode nuit">
   </app-custom-buttons-rond>
+
+  <!-- bouton GPX — label natif garanti par le navigateur -->
+  <div class="btn-wrapper">
+    <label class="btn gpx-btn" aria-label="Importer un fichier GPX">
+      <fa-icon [icon]="faFileImport"></fa-icon>
+      <input
+        type="file"
+        accept=".gpx"
+        (change)="onGpxSelected($event)"
+        (click)="$event.stopPropagation()">
+    </label>
+    <span class="btn-tooltip">Importer un GPX</span>
+  </div>
 
 </div>

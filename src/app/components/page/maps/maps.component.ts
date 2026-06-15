@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, OnInit, signal, viewChild } from '@angular/core';
 import mapboxgl from 'mapbox-gl';
 import { environment } from '../../../../../environments/environment';
 import { MapsTabs } from './maps-tabs/maps-tabs';
 import { MapsButtons } from './maps-buttons/maps-buttons';
-import { GpxService } from '../../../communs/services/gpx.service';
+import { GpxService } from './services/gpx.service';
+
 
 @Component({
   selector: 'app-test',
@@ -15,8 +16,7 @@ import { GpxService } from '../../../communs/services/gpx.service';
 export class MapsComponent implements OnInit, OnDestroy {
   private map = signal<mapboxgl.Map | null>(null);
   private mapContainer = viewChild.required<ElementRef<HTMLDivElement>>('mapContainer');
-
-  mapInstance: mapboxgl.Map | null = null;
+  private gpxService = inject(GpxService);
 
   ngOnInit(): void {
     (mapboxgl as any).accessToken = environment.MAPBOX_TOKEN_PUBLIC;
@@ -59,26 +59,24 @@ export class MapsComponent implements OnInit, OnDestroy {
     });
   }
 
-  onToggleGpx(visible: boolean): void {
+  onGpxFile(file: File): void {
     const map = this.map();
     if (!map) return;
 
-    // Premier appel → on charge le GPX
-    if (visible && !this.gpxLoaded) {
-      this.gpxService.loadGpx(map, '/assets/gpx/etape1_Calenzana_Au_refuge_Ortu.gpx')
-        .then(() => this.gpxLoaded = true)
-        .catch(err => console.error('Erreur GPX:', err));
-      return;
-    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const gpxText = e.target?.result as string;
+      if (!gpxText) return;
 
-    // Appels suivants → on toggle la visibilité
-    if (map.getLayer('gr20-line')) {
-      map.setLayoutProperty(
-        'gr20-line',
-        'visibility',
-        visible ? 'visible' : 'none'
-      );
-    }
+      // Retire l'ancien tracé s'il existe
+      if (map.getLayer('gr20-line')) map.removeLayer('gr20-line');
+      if (map.getLayer('sky')) map.removeLayer('sky');
+      if (map.getSource('gr20-test')) map.removeSource('gr20-test');
+
+      this.gpxService.loadGpx(map, gpxText)
+        .catch(err => console.error('Erreur GPX:', err));
+    };
+    reader.readAsText(file);
   }
 
   ngOnDestroy(): void {
@@ -123,5 +121,4 @@ export class MapsComponent implements OnInit, OnDestroy {
       `&BBOX={bbox-epsg-3857}`
     );
   }
-
 }
