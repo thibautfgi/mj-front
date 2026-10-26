@@ -24,7 +24,7 @@ export class MapsComponent implements OnInit, OnDestroy {
     const map = new mapboxgl.Map({
       container: this.mapContainer().nativeElement,
       style: 'mapbox://styles/mapbox/outdoors-v12',
-      center: [9.0, 42.0],
+      center: [1.619, 42.553], // recentré sur la nouvelle zone Copernicus
       zoom: 9,
       pitch: 0,
       bearing: 0,
@@ -96,7 +96,7 @@ export class MapsComponent implements OnInit, OnDestroy {
       type: 'raster',
       tiles: [this.buildSnowWmsUrl()],
       tileSize: 512,
-      bounds: [8.53, 41.33, 9.57, 43.03],
+      bounds: [1.378784, 42.411291, 1.859436, 42.694549],
       attribution: '© Copernicus/ESA Sentinel-2'
     });
 
