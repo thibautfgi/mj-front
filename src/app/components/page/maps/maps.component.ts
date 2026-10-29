@@ -64,17 +64,30 @@ export class MapsComponent implements OnInit, OnDestroy {
     if (!map) return;
 
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       const gpxText = e.target?.result as string;
       if (!gpxText) return;
 
-      // Retire l'ancien tracé s'il existe
-      if (map.getLayer('gr20-line')) map.removeLayer('gr20-line');
-      if (map.getLayer('sky')) map.removeLayer('sky');
-      if (map.getSource('gr20-test')) map.removeSource('gr20-test');
+      try {
+        // Attend que le style soit prêt, sinon addSource/addLayer échouent
+        if (!map.isStyleLoaded()) {
+          await new Promise<void>(resolve => map.once('style.load', () => resolve()));
+        }
 
-      this.gpxService.loadGpx(map, gpxText)
-        .catch(err => console.error('Erreur GPX:', err));
+        const start = await this.gpxService.loadGpx(map, gpxText);
+
+        if (start) {
+          this.gpxService.addGltfLayer(map, {
+            id: 'refuge-model',
+            url: '/assets/shiba/scene.gltf',
+            lngLat: start,
+            altitude: 1200,
+            scale: 1000
+          });
+        }
+      } catch (err) {
+        console.error('Erreur GPX:', err);
+      }
     };
     reader.readAsText(file);
   }
